@@ -1,5 +1,5 @@
 import io
-
+import re
 
 class LogReader:
     def __init__(self, log_file):
@@ -13,3 +13,15 @@ class LogReader:
     def _tokenize(self, string):
         parts = string.split()
 
+    @staticmethod
+    def regex_generator(key):
+        pattern = '%s=[(A-Z), (_), (0-9)]+' % key
+        return pattern
+
+    @staticmethod
+    def get_cardId(string):
+        pattern = LogReader.regex_generator('cardId')
+        match = re.search(pattern, string)
+        if match:
+            val = match.group().strip()
+            return val.split('=')[1]
