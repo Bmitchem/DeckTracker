@@ -31,11 +31,13 @@ class TestCardIDRead(RegexTestCase):
         self.assertEquals(self.card_id, 'GVG_078')
 
 
+
 class TestTokenize(LogReaderTestCase):
     def setUp(self):
         super(TestTokenize, self).setUp()
         test_string = "2015-12-03 21:53:33.355: [Zone] ZoneChangeList.ProcessChanges() - id=104 local=False [name=Mechanical Yeti id=35 zone=PLAY zonePos=3 cardId=GVG_078 player=2] pos from 4 -> 3"
         self.tokens = self.logReader._tokenize(test_string)
+        print self.tokens
 
     def test_tokens_created(self):
         self.assertTrue(self.tokens)
