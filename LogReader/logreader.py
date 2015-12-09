@@ -15,7 +15,7 @@ class LogReader:
         parts = {}
         parts['card'] = self.get_card(string)
         print parts['card']
-        return parts
+        return parts['card']
 
     @staticmethod
     def regex_generator(key):
@@ -44,5 +44,5 @@ class LogReader:
         return card
 
     def get_card_property(self, card_string, card_property):
-        m = re.search('(?<=%s=)\w+' % card_property, card_string)
-        return m.group(0)
+        m = re.search(LogReader.regex_generator(card_property), card_string)
+        return m.group().strip().split('=')[1]

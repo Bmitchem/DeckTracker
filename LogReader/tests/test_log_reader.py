@@ -27,6 +27,7 @@ class TestCardIDRead(RegexTestCase):
 
     def test_card_id_no_fail(self):
         self.assertTrue(self.card_id)
+
     def test_correct_id(self):
         self.assertEquals(self.card_id, 'GVG_078')
 
@@ -43,7 +44,8 @@ class TestTokenize(LogReaderTestCase):
         self.assertTrue(self.tokens)
 
     def test_number_of_tokens(self):
-        self.assertEqual(len(self.tokens), 8)
+        self.assertEqual(len(self.tokens), 6)
 
-    def test_date_token(self):
-        self.assertEqual(self.tokens.get('date'), '2015-12-03')
+    def test_card_id_token(self):
+        self.assertEqual(self.tokens.get('cardId'), 'GVG_078')
+
