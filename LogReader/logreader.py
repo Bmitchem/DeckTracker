@@ -13,9 +13,18 @@ class LogReader:
 
     def _tokenize(self, string):
         parts = {}
+        parts['date'] = self.get_date(string)
+        parts['time'] = self.get_time(string)
         parts['card'] = self.get_card(string)
-        print parts['card']
-        return parts['card']
+        return parts
+
+    @staticmethod
+    def get_date(string):
+        return re.search(r'(\d+-\d+-\d+)', string).group(1)
+
+    @staticmethod
+    def get_time(string):
+        return re.search(r'(\d+:\d+:\d+.\d+)', string).group(1)
 
     @staticmethod
     def regex_generator(key):
