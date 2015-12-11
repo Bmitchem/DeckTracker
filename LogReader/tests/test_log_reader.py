@@ -52,3 +52,7 @@ class TestTokenize(LogReaderTestCase):
     def test_time_token(self):
         self.assertEqual(self.tokens.get('time'), '21:53:33.355')
         self.assertEqual(self.logReader.get_time(self.test_string), '21:53:33.355')
+
+    def test_zone_function_token(self):
+        self.assertEqual(self.tokens.get('zone_function'), 'ProcessChanges')
+        self.assertEqual(self.logReader.get_zone_function(self.test_string), 'ProcessChanges')

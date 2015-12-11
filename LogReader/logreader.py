@@ -15,6 +15,7 @@ class LogReader:
         parts = {}
         parts['date'] = self.get_date(string)
         parts['time'] = self.get_time(string)
+        parts['zone_function'] = self.get_zone_function(string)
         parts['card'] = self.get_card(string)
         return parts
 
@@ -25,6 +26,10 @@ class LogReader:
     @staticmethod
     def get_time(string):
         return re.search(r'(\d+:\d+:\d+.\d+)', string).group(1)
+
+    @staticmethod
+    def get_zone_function(string):
+        return re.search('(?<=ZoneChangeList.)\w+', string).group(0)
 
     @staticmethod
     def regex_generator(key):
