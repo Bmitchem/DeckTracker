@@ -44,19 +44,19 @@ class LogReader:
             val = match.group().strip()
             return val.split('=')[1]
 
-    def get_card(self, string):
-        card_properties = ['name', 'id', 'zone', 'zonePos', 'cardId', 'player']
+    @staticmethod
+    def get_card(string):
         card = {}
 
         start = string.rindex('[') + 1
         end = string.rindex(']')
         card_string = string[start:end]
 
-        for card_property in card_properties:
-            card[card_property] = self.get_card_property(card_string, card_property)
+        zones = [s.split('=', 1) for s in card_string.split()]
+        for zone in zones:
+            if len(zone) > 1:
+                card[zone[0]] = zone[1]
+            else:
+                card['name'] = card['name'] + " " + zone[0]
 
         return card
-
-    def get_card_property(self, card_string, card_property):
-        m = re.search(LogReader.regex_generator(card_property), card_string)
-        return m.group().strip().split('=')[1]
